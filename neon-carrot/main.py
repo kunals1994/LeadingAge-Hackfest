@@ -35,7 +35,7 @@ class CallGenerator(webapp2.RequestHandler):
 		if(self.request.get("flag")=="0"):
 			resp = '<?xml version="1.0" encoding="UTF-8"?><Response><Pause length = "3"/><Play loop = "3">http://neon-carrot.appspot.com/index/1.wav</Play></Response>'
 		else:
-			resp = '<?xml version="1.0" encoding="UTF-8"?><Response><Pause length = "3"/><Say loop = "0" language = "%(language)s">%(message)s</Say></Response>'
+			resp = '<?xml version="1.0" encoding="UTF-8"?><Response><Pause length = "3"/><Say voice = "woman" loop = "0" language = "%(language)s">%(message)s</Say></Response>'
 			resp = resp % param
 		self.response.write(resp)
 
