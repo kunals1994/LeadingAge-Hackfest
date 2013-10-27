@@ -24,7 +24,7 @@ class MainHandler(webapp2.RequestHandler):
 class CallGenerator(webapp2.RequestHandler):
 	def get(self):
 		message = self.request.get("msg")
-		resp = '<?xml version="1.0" encoding="UTF-8"?><Response><Say voice = "woman">%s</Say></Response>'
+		resp = '<?xml version="1.0" encoding="UTF-8"?><Response><Pause length="5"/><Say voice = "woman">%s</Say><Pause length="2"/></Response>'
 		resp = resp % message
 		self.response.write(resp)
 
@@ -36,10 +36,13 @@ class CallHandler(webapp2.RequestHandler):
 		account_sid = "AC03701871ae569b1ec0facf7b8ad41e19"
 		auth_token  = "9908bfe073c98b4ac3fc0afce32ff77f"
 		client = TwilioRestClient(account_sid, auth_token)
+
+		message = message.replace(" ", "%20")
  
 		call = client.calls.create(url="http://neon-carrot.appspot.com/twiml?msg="+message,
    			to=number,
-    		from_="+18084197884")
+    		from_="+18084197884", 
+    		method = "GET")
 
 
 app = webapp2.WSGIApplication([
